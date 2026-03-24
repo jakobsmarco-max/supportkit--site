@@ -1,0 +1,14 @@
+# Netlify configuration for SupportKit Universal Links
+
+# Serve the apple-app-site-association file with the correct Content-Type.
+# Apple requires application/json — without this header iOS will reject the file.
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+
+# Optional: redirect the root to a simple landing page or the App Store
+# [[redirects]]
+#   from = "/"
+#   to = "https://apps.apple.com/app/idXXXXXXXXX"
+#   status = 301
