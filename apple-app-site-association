@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "com.Marco.2026.SupportKit",
+        "paths": [
+          "/tool/*",
+          "/"
+        ]
+      }
+    ]
+  }
+}

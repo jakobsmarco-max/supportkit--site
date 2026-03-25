@@ -7,6 +7,20 @@
   [headers.values]
     Content-Type = "application/json"
 
+[[headers]]
+  for = "/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+
+# Serve the AASA file also directly at root level as fallback (some CDN/proxy setups
+# block dot-directories). The file apple-app-site-association at root is served
+# via a redirect so the canonical /.well-known/ URL stays the primary path.
+[[redirects]]
+  from = "/.well-known/apple-app-site-association"
+  to = "/apple-app-site-association"
+  status = 200
+  force = false
+
 # Rewrite /tool/* paths to the landing page so Safari shows a proper page
 # instead of a 404 when Universal Links fall through to the browser.
 [[redirects]]
