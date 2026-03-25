@@ -2,6 +2,9 @@
 
 # Serve the apple-app-site-association file with the correct Content-Type.
 # Apple requires application/json — without this header iOS will reject the file.
+# Both paths are served directly from their respective files (no redirects).
+# Apple's CDN fetches AASA on app install; any redirect — even a 200 rewrite —
+# can cause iOS to silently discard the association.
 [[headers]]
   for = "/.well-known/apple-app-site-association"
   [headers.values]
@@ -11,15 +14,6 @@
   for = "/apple-app-site-association"
   [headers.values]
     Content-Type = "application/json"
-
-# Serve the AASA file also directly at root level as fallback (some CDN/proxy setups
-# block dot-directories). The file apple-app-site-association at root is served
-# via a redirect so the canonical /.well-known/ URL stays the primary path.
-[[redirects]]
-  from = "/.well-known/apple-app-site-association"
-  to = "/apple-app-site-association"
-  status = 200
-  force = false
 
 # Rewrite /tool/* paths to the landing page so Safari shows a proper page
 # instead of a 404 when Universal Links fall through to the browser.
